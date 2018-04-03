@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head x-runat="server">
+    <title></title>
+    <script src="libs/jq.js"></script>
+    <script src="libs/_.js"></script>
+    <script src="util01.html.001.js"></script>
+    
+    <style>
+        .condiDiv  input, .condiDiv  textarea {
+
+            vertical-align:middle;
+            margin:10px;
+        }
+        .condiDiv {
+            width:800px;
+            float:left;
+        }
+        #escapSeqdiv code{
+            background-color:rgba(254, 58, 58, 0.21);
+            color:#b94bc6;
+            padding:5px;
+            font-size:15px;
+            margin-top:20px;
+            margin-bottom:20px;
+        }
+        .quoteCode{
+            font-size:15px;
+            margin:10px;
+            line-height:30px;
+            background-color:aqua;
+        }
+        .quoteCode #quote:before{
+            content:"//";
+        }
+        .quoteCode #quote:after{
+            content:attr(q);
+            color:#430253;
+        }
+
+        .quoteCode #author:after{
+            content:attr(a);
+            color:#860025;
+        }
+        .quoteCode #qt:after{
+            content:" - ";
+        }
+        #genBtn{
+            margin:10px;
+            height:30px;
+            border-radius:3px;
+            font-size:20px;
+            cursor:pointer;
+        }
+        #escapSeqdiv{
+            float:left;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <p  class="quoteCode">
+            <code class="quoteCode">
+                <i id="qt" ><span id="quote"></span></i> <span id="ath"><span id="author"></span></span>
+            </code>
+        </p>
+        
+    </center>
+    <form id="form1" runat="server">
+    <div>
+        <center>
+            <textarea id="inputStr" spellcheck="false" placeholder="//                    input" cols="70" rows="10"></textarea><textarea id="outs" cols="70" rows="10" placeholder="//                    output"  spellcheck="false"></textarea><br />
+        <label>Select Template:<select id="Chosen"></select></label>
+            <br />
+            <input type="button" value="Generate String" id="genBtn" />
+        </center>
+        
+        
+        <!--
+        <label>Remove: <code>separate by blank spaces :Like- [ @</code> <input type="text" id="removeThese"/></label><br />
+        <label>Remove CR:<input type="checkbox" id="remCR"/></label><br />
+        <label>Remove LF:<input type="checkbox" id="remLF"/></label><br />
+        <label>Remove Tab:<input type="checkbox" id="remTAB"/></label>
+            -->
+        <center>
+            <div class="condiDiv">
+                <label><input type="checkbox" id="ifRem" /> Remove These character (separate by a blank space):<input type="text" id="remThese" /><br /></label><!--[ check if they are in sequence <input type="checkbox" id="ifSequence"/> ]</label><br />-->
+                <label>splitter:<input type="text" id="splitter"/></label> <label>Trim (remove blank Space):<input type="checkbox" id="trimm"/></label><br />
+                <label>Each Line PreFIX:<textarea cols="30" rows="5" id="defaultEachLinePrefix"></textarea></label><br />
+                <label>Each Line SufFix:<textarea cols="30" rows="2" id="defaultEachLineSuffix"></textarea></label><br />
+                <label>Whole Doc PreFIX:<textarea cols="30" rows="2" id="defaultWholeDocPrefix"></textarea></label><br />
+                <label>Whole Doc SufFix:<textarea cols="30" rows="2" id="defaultWholeDocSuffix"></textarea></label><br />
+            
+            </div>
+        
+            <div id="escapSeqdiv" ></div>
+            <br />
+        </center>
+    </div>
+    </form>
+</body>
+</html>
