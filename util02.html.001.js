@@ -15,6 +15,7 @@ var Strings = {
         return function (str, o) {
             o = o || window;
             return str.replace(regexp, function (ignore, key) {
+                console.log(str,"<>","IGN=>",ignore,",   KEY=>",key);
                 return (key = o[key]) == null ? '' : key;
             });
         }
