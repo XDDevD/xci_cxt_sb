@@ -11,14 +11,37 @@
 
 var Strings = {
     create: (function () {
-        var regexp = /{([^{]+)}/g;
+        var regexp = /{([^{}]+)}/g;
+        var regexp2 = /{{([^{}]+)}}/g;
         return function (str, o) {
             o = o || window;
-            return str.replace(regexp, function (ignore, key) {
-                console.log(str,"<>","IGN=>",ignore,",   KEYe=>",key);
-                return (key = o[key]) == null ? '' : key;
+            // var Str1 = str.replace(regexp, function (ignore, key) {
+            //     // console.log(str,"<>","IGN=>",ignore,",   KEYe=>",key);
+            //     // return (key = o[key]) == null ? '' : key;
+            //     var v = null;
+            //     try {
+            //         v = eval(key);
+            //     } catch (error) {
+            //         v=null;
+            //     }
+            //     return (key = v) == null ? '' : key;
+            // });
+
+            return str.replace(regexp2, function (ignore, key) {
+                // console.log(str,"<>","IGN=>",ignore,",   KEYe=>",key);
+                // return (key = o[key]) == null ? '' : key;
+                var v = null;
+                    var evalx = "o."+key;
+                try {
+                    v = eval(evalx);
+                } catch (error) {
+                    v = null;
+                }
+                console.log("evalX=>",evalx,",Val=>",v);
+                return (key = v) == null ? '' : key;
             });
         }
+
     })()
 };
 
@@ -285,12 +308,12 @@ $(document).ready(function () {
             inpObj = StrArr;
         }
         
-        debugger;
+        // debugger;
 
         var op = "";
         if(Array.isArray(inpObj)){
             op = inpObj.map(function(data,index){
-                var Escaped = String(Format).replace(/({\\this})/ig,'{data}').replace(/({\\thisIndex})/ig,'{index}');
+                var Escaped = String(Format).replace(/(\\thisIndex)/ig,'index').replace(/(\\this)/ig,'data');
                 var Str = Escaped.create({data:data,index:index});
 
                 console.log({Escaped:Escaped,Str:Str});
