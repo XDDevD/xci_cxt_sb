@@ -15,12 +15,22 @@ var Strings = {
         return function (str, o) {
             o = o || window;
             return str.replace(regexp, function (ignore, key) {
-                console.log(str,"<>","IGN=>",ignore,",   KEY=>",key);
+                console.log(str,"<>","IGN=>",ignore,",   KEYe=>",key);
                 return (key = o[key]) == null ? '' : key;
             });
         }
     })()
 };
+
+/*
+"{abc}156721{{{{1+2}}}}jdh dshdkjs{2}".replace(/{{([^{}]+)}}/g,function(ign,key){
+console.log(ign,key);
+return "---";
+});
+
+Try With Eval:Reminder;
+*/
+
 String.prototype.create = function (o) {
     return Strings.create(this, o || window);
 }
